@@ -14,6 +14,8 @@
 		5C4F3B1A242E01FE00590DFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4F3B19242E01FE00590DFB /* Assets.xcassets */; };
 		5C4F3B1D242E01FE00590DFB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4F3B1C242E01FE00590DFB /* Preview Assets.xcassets */; };
 		5C4F3B20242E01FE00590DFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4F3B1E242E01FE00590DFB /* LaunchScreen.storyboard */; };
+		5C4F3B28242E051000590DFB /* ToDoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4F3B27242E051000590DFB /* ToDoItemView.swift */; };
+		5C74AEB6242F602800B78589 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C74AEB5242F602800B78589 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,9 @@
 		5C4F3B1C242E01FE00590DFB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5C4F3B1F242E01FE00590DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C4F3B21242E01FE00590DFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C4F3B27242E051000590DFB /* ToDoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemView.swift; sourceTree = "<group>"; };
+		5C74AEB3242F602400B78589 /* NCXProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NCXProject.entitlements; sourceTree = "<group>"; };
+		5C74AEB5242F602800B78589 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C74AEB6242F602800B78589 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +50,7 @@
 			children = (
 				5C4F3B0F242E01FB00590DFB /* NCXProject */,
 				5C4F3B0E242E01FB00590DFB /* Products */,
+				5C74AEB4242F602800B78589 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,9 +65,11 @@
 		5C4F3B0F242E01FB00590DFB /* NCXProject */ = {
 			isa = PBXGroup;
 			children = (
+				5C74AEB3242F602400B78589 /* NCXProject.entitlements */,
 				5C4F3B10242E01FB00590DFB /* AppDelegate.swift */,
 				5C4F3B12242E01FB00590DFB /* SceneDelegate.swift */,
 				5C4F3B17242E01FB00590DFB /* ContentView.swift */,
+				5C4F3B27242E051000590DFB /* ToDoItemView.swift */,
 				5C4F3B19242E01FE00590DFB /* Assets.xcassets */,
 				5C4F3B1E242E01FE00590DFB /* LaunchScreen.storyboard */,
 				5C4F3B21242E01FE00590DFB /* Info.plist */,
@@ -76,6 +85,14 @@
 				5C4F3B1C242E01FE00590DFB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5C74AEB4242F602800B78589 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C74AEB5242F602800B78589 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +168,7 @@
 			files = (
 				5C4F3B16242E01FB00590DFB /* NCXProject.xcdatamodeld in Sources */,
 				5C4F3B11242E01FB00590DFB /* AppDelegate.swift in Sources */,
+				5C4F3B28242E051000590DFB /* ToDoItemView.swift in Sources */,
 				5C4F3B18242E01FB00590DFB /* ContentView.swift in Sources */,
 				5C4F3B13242E01FB00590DFB /* SceneDelegate.swift in Sources */,
 			);
@@ -288,6 +306,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NCXProject/NCXProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"NCXProject/Preview Content\"";
 				DEVELOPMENT_TEAM = Y62T8282RJ;
@@ -308,6 +327,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NCXProject/NCXProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"NCXProject/Preview Content\"";
 				DEVELOPMENT_TEAM = Y62T8282RJ;

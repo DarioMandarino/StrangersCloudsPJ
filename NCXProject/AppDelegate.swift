@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -43,6 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          error conditions that could cause the creation of the store to fail.
         */
         let container = NSPersistentCloudKitContainer(name: "NCXProject")
+        guard let description = container.persistentStoreDescriptions.first else{
+            fatalError("No Description Found")
+        }
+        
+        description.setOption(true as NSObject, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -59,6 +65,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        
+         NotificationCenter.default.addObserver(self, selector: #selector(self.processUpdate), name: .NSPersistentStoreRemoteChange, object: nil)
+        
         return container
     }()
 
@@ -77,6 +88,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
-}
-
+    
+    @objc func processUpdate(notification: NSNotification){
+            operationQueue.addOperation {
+                //get our context
+                let context = self.persistentContainer.newBackgroundContext()
+                context.performAndWait {
+                    //get list items out of store
+                    let items: [ListItem]
+                    do{
+                        try items = context.fetch(ListItem.getListItemFetchRequest())
+                    } catch{
+                        let nserror = error as NSError
+                        fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                    }
+                    //record items
+                    items.enumerated().forEach {index, item in
+                        if item.order != index {
+                            item.order = index
+                        }
+                    }
+                    //save if we need to save
+                    if context.hasChanges {
+                        do {
+                            try context.save()
+                        } catch{
+                            let nserror = error as NSError
+                            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                        }
+                    }
+                }
+            }
+        }
+        
+        lazy var operationQueue: OperationQueue = {
+            var queue = OperationQueue()
+            queue.maxConcurrentOperationCount = 1
+            return queue
+        }()
+        
+    }
